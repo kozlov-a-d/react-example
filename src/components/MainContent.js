@@ -3,7 +3,19 @@ import React from 'react';
 function MainContent (){
     return (
         <main>
-            <p>This is where most of my content will go...</p>
+            <div>
+                <input type="checkbox" />
+                <p>Placeholder text here</p>
+                
+                <input type="checkbox" />
+                <p>Placeholder text here</p>
+                
+                <input type="checkbox" />
+                <p>Placeholder text here</p>
+                
+                <input type="checkbox" />
+                <p>Placeholder text here</p>
+            </div>
         </main>
     )
 }
