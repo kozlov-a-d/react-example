@@ -1,11 +1,13 @@
 import React from 'react';
 
-const TodoItem = () => {
+const TodoItem = (props) => {
+    let name = props.name ? props.name : 'Placeholder text here';
 
     return (
+        // <div style={{display: props.name ? "block" : "none"}} className="todo-item">
         <div className="todo-item">
             <input type="checkbox" />
-            <p>Placeholder text here</p>
+            <p>{name}</p>
         </div>
     )
 }

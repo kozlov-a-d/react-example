@@ -1,21 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MyInfo from './components/MyInfo';
 import App from './App';
 
 import './index.css';
 // import * as serviceWorker from './serviceWorker';
-
-function MyApp(){
-    return (
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-        </ul>
-    )
-}
 
 ReactDOM.render(
     <App />, 
