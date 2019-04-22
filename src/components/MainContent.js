@@ -1,26 +1,34 @@
 import React from 'react';
 
 import TodoItem from './TodoItem';
-import TODOS from '../todoData';
+import todosData from '../todosData';
 
-const MainContent = () => {
-    const firstName = "Bob";
-    const lastName = "Ziroll";
-    // const date = new Date();
+class MainContent extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            todos: todosData
+        }
+    }
 
-    const todoComponents = TODOS.map( todo => {
-        return (<TodoItem key={todo.id} name={todo.name} />)
-    });
+    handleClick(){
+        console.log('test 2') 
+    }
 
-    return (
-        <main>
-            <h1>Hello {`${firstName} ${lastName}`}!</h1>
-            {/* <h2>It is currently about {date.getHours() % 12} o'clock!</h2> */}
-            <div className="todo-list">
-                {todoComponents}
-            </div>
-        </main>
-    )
+    render(){
+        const todoItems = this.state.todos.map( item => {
+            return (<TodoItem key={item.id} item={item} />)
+        });
+    
+        return (
+            <main>
+                <button onClick={this.handleClick}>Click me</button>
+                <div className="todo-list">
+                    {todoItems}
+                </div>
+            </main>
+        )
+    }
 }
 
 export default MainContent;
