@@ -9,10 +9,13 @@ class MainContent extends React.Component {
         this.state = {
             todos: todosData,
             count: 0,
-            isLoading: true
+            isLoading: true,
+            firstName: "",
+            lastName: ""
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeInput = this.handleChangeInput.bind(this);
     }
 
     componentDidMount() {
@@ -21,6 +24,13 @@ class MainContent extends React.Component {
                 isLoading: false
             })
         }, 1500)
+    }
+
+    handleChangeInput(event){
+        const {name, value} = event.target;
+        this.setState({
+            [name]: value
+        })
     }
 
     handleChange(id){
@@ -52,6 +62,13 @@ class MainContent extends React.Component {
     
         return (
             <main>
+                <form>
+                    <input type="text" name="firstName" placeholder="First Name" onChange={this.handleChangeInput} />
+                    <br />
+                    <input type="text" name="lastName" placeholder="Last Name" onChange={this.handleChangeInput} />
+                    <h1>{this.state.firstName} {this.state.lastName}</h1>
+                </form>
+                
                 <button onClick={this.handleClick}>Click me { this.state.count }</button>
                 <div className="todo-list">
                     {todoItems}
