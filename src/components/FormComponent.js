@@ -2,8 +2,7 @@ import React from 'react';
 
 function FormComponent(props) {
     return (
-        // <form onSubmit={this.handleSubmit}>
-        <form>
+        <form onSubmit={props.handleSubmit}>        
             <input type="text" name="firstName" placeholder="First Name" onChange={props.handleChange} />
             <br />
             <input type="text" name="lastName" placeholder="Last Name" onChange={props.handleChange} />
@@ -45,6 +44,8 @@ function FormComponent(props) {
             <h1>{props.data.firstName} {props.data.lastName}</h1>
             <h2><font color="#3AC1EF">You are a {props.data.gender}</font></h2>
             <h2><font color="#3AC1EF">Your favorite color is {props.data.favColor}</font></h2>
+
+
 
             <button>Submit</button>
         </form>

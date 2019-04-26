@@ -23,9 +23,13 @@ class Form extends React.Component {
         type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
     }
 
+    handleSubmit = (event) => {
+        console.log('submit');
+    }
+
     render(){
         return (
-            <FormComponent handleChange={this.handleChange} data={this.state}/>
+            <FormComponent handleChange={this.handleChange} handleSubmit={this.handleSubmit} data={this.state}/>
         )
     }
 }

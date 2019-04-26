@@ -2,13 +2,14 @@ import React from 'react';
 
 import TodoItem from './TodoItem';
 import todosData from '../todosData';
-import Form from "./FormContainer"
+import FormAdd from "./FormAdd"
 
 class MainContent extends React.Component {
     constructor(){
         super();
         this.state = {
             todos: todosData,
+            newTodo: "",
             count: 0,
             isLoading: true,
             firstName: "",
@@ -17,9 +18,6 @@ class MainContent extends React.Component {
             gender: "",
             favColor: "blue"
         };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChangeInput = this.handleChangeInput.bind(this);
     }
 
     componentDidMount() {
@@ -30,16 +28,7 @@ class MainContent extends React.Component {
         }, 1500)
     }
 
-    /**
-     * Швейцарский нож для обработки форм
-     * @param {*} event 
-     */
-    handleChangeInput(event){
-        const {name, value, type, checked} = event.target;
-        type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
-    }
-
-    handleChange(id){
+    handleChangeComplited = (id) => {
         this.setState(prevState => {
             const updatedTodos = prevState.todos.map(todo => {
                 if (todo.id === id) {
@@ -53,23 +42,37 @@ class MainContent extends React.Component {
         });
     }
 
-    handleClick(){
-        this.setState(prevState => {
-            return {
-                count: prevState.count + 1
-            }
-        });
+    /**
+     * Швейцарский нож для обработки форм
+     * @param {*} event 
+     */
+    handleChange = (event) => {
+        const {name, value, type, checked} = event.target;
+        type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.setState(prevState => ({
+            todos: [...prevState.todos, {
+                id: 11, 
+                text: this.state.newTodo + "!!!!", 
+                completed: false
+            }]
+        }));
+        this.setState(prevState => ({
+            newTodo: ''
+        }))
     }
 
     render(){
         const todoItems = this.state.todos.map( item => {
-            return (<TodoItem key={item.id} item={item} handleChange={this.handleChange} />)
+            return (<TodoItem key={item.id} item={item} handleChange={this.handleChangeComplited} />)
         });
     
         return (
             <main>
-                <Form/>
-                <button onClick={this.handleClick}>Click me { this.state.count }</button>
+                <FormAdd data={ this.state.newTodo }  handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                 <div className="todo-list">
                     {todoItems}
                 </div>
