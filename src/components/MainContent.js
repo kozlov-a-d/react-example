@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoItem from './TodoItem';
 import todosData from '../todosData';
+import Form from "./FormContainer"
 
 class MainContent extends React.Component {
     constructor(){
@@ -11,7 +12,10 @@ class MainContent extends React.Component {
             count: 0,
             isLoading: true,
             firstName: "",
-            lastName: ""
+            lastName: "",
+            isFriendly: false,
+            gender: "",
+            favColor: "blue"
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -26,11 +30,13 @@ class MainContent extends React.Component {
         }, 1500)
     }
 
+    /**
+     * Швейцарский нож для обработки форм
+     * @param {*} event 
+     */
     handleChangeInput(event){
-        const {name, value} = event.target;
-        this.setState({
-            [name]: value
-        })
+        const {name, value, type, checked} = event.target;
+        type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
     }
 
     handleChange(id){
@@ -62,13 +68,7 @@ class MainContent extends React.Component {
     
         return (
             <main>
-                <form>
-                    <input type="text" name="firstName" placeholder="First Name" onChange={this.handleChangeInput} />
-                    <br />
-                    <input type="text" name="lastName" placeholder="Last Name" onChange={this.handleChangeInput} />
-                    <h1>{this.state.firstName} {this.state.lastName}</h1>
-                </form>
-                
+                <Form/>
                 <button onClick={this.handleClick}>Click me { this.state.count }</button>
                 <div className="todo-list">
                     {todoItems}
